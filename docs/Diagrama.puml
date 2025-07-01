@@ -1,0 +1,239 @@
+@startuml
+!theme aws-orange
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' ===== CLASE PRINCIPAL DEL SISTEMA =====
+class SnakeGame {
+    - {static} WINDOW_WIDTH: const int = 1200
+    - {static} WINDOW_HEIGHT: const int = 900
+    - {static} GRID_SIZE: const int = 20
+    - isRunning: bool
+    - currentState: GameState
+    __
+    + Initialize(): bool
+    + Run(): void
+    + Update(): void
+    + Shutdown(): void
+}
+
+' ===== COMPONENTES PRINCIPALES =====
+class Juego {
+    - score: int
+    - gameOver: bool
+    - gameStarted: bool
+    - level: int
+    __
+    + StartGame(): void
+    + RestartGame(): void
+    + EndGame(): void
+    + UpdateGame(): void
+    + CheckCollisions(): bool
+}
+
+class Pantalla {
+    - window: SDL_Window*
+    - screenType: ScreenType
+    __
+    + ShowMenu(): void
+    + ShowGame(): void
+    + ShowGameOver(): void
+    + RenderAll(): void
+    + Clear(): void
+    + Present(): void
+}
+
+class Serpiente {
+    - currentDirection: Direction
+    - nextDirection: Direction
+    - speed: int
+    - length: int
+    __
+    + Move(): void
+    + ChangeDirection(direction: Direction): void
+    + Grow(): void
+    + CheckSelfCollision(): bool
+    + CheckBoundaryCollision(): bool
+}
+
+class Comida {
+    - position: Position
+    - type: FoodType
+    - points: int
+    - isActive: bool
+    __
+    + Generate(): void
+    + Consume(): void
+    + Respawn(): void
+    + IsEatenBy(snake: Serpiente&): bool
+}
+
+class Tablero {
+    - width: int
+    - height: int
+    - margin: int
+    __
+    + Initialize(): void
+    + IsValidPosition(pos: Position): bool
+    + GetRandomPosition(): Position
+    + RenderBounds(): void
+}
+
+class Controlador {
+    - isEnabled: bool
+    __
+    + HandleInput(): void
+    + ProcessKeyboard(): void
+    + ProcessMouse(): void
+    + MapControls(): void
+}
+
+class Sonido {
+    - musicVolume: int
+    - soundVolume: int
+    - isMuted: bool
+    __
+    + PlayMusic(track: string): void
+    + PlayEffect(sound: string): void
+    + StopMusic(): void
+    + SetVolume(volume: int): void
+}
+
+class Puntuacion {
+    - currentScore: int
+    - highScore: int
+    - level: int
+    __
+    + AddPoints(points: int): void
+    + SaveHighScore(): void
+    + LoadHighScore(): void
+    + Reset(): void
+}
+
+' ===== ELEMENTOS INTERNOS =====
+class Segmento {
+    - position: Position
+    - type: SegmentType
+    __
+    + Render(): void
+    + SetPosition(pos: Position): void
+}
+
+class Position {
+    + x: int
+    + y: int
+    __
+    + Position(x: int, y: int)
+    + operator==(other: Position): bool
+    + operator!=(other: Position): bool
+}
+
+class Textura {
+    - path: string
+    - texture: SDL_Texture*
+    - width: int
+    - height: int
+    __
+    + Load(path: string): bool
+    + Render(x: int, y: int): void
+    + Free(): void
+}
+
+class Audio {
+    - chunk: Mix_Chunk*
+    - music: Mix_Music*
+    - volume: int
+    __
+    + Load(path: string): bool
+    + Play(loops: int): void
+    + Stop(): void
+}
+
+class Entrada {
+    - key: SDL_Keycode
+    - action: InputAction
+    - isPressed: bool
+    __
+    + IsPressed(): bool
+    + GetAction(): InputAction
+    + Reset(): void
+}
+
+class Numero {
+    - value: int
+    - digitTextures: SDL_Texture*[]
+    __
+    + SetValue(value: int): void
+    + Render(x: int, y: int): void
+}
+
+' ===== ENUMS =====
+enum Direction {
+    UP
+    DOWN
+    LEFT
+    RIGHT
+}
+
+enum GameState {
+    MENU
+    PLAYING
+    PAUSED
+    GAME_OVER
+}
+
+enum SegmentType {
+    HEAD
+    BODY
+    TAIL
+}
+
+enum FoodType {
+    NORMAL
+    BONUS
+    SPECIAL
+}
+
+enum ScreenType {
+    MENU_SCREEN
+    GAME_SCREEN
+    GAMEOVER_SCREEN
+}
+
+enum InputAction {
+    MOVE_UP
+    MOVE_DOWN
+    MOVE_LEFT
+    MOVE_RIGHT
+    PAUSE
+    RESTART
+}
+
+' ===== RELACIONES PRINCIPALES (AGREGACIÓN) =====
+SnakeGame o-- Juego
+SnakeGame o-- Pantalla
+SnakeGame o-- Serpiente
+SnakeGame o-- Comida
+SnakeGame o-- Tablero
+SnakeGame o-- Controlador
+SnakeGame o-- Sonido
+SnakeGame o-- Puntuacion
+
+' ===== RELACIONES INTERNAS (COMPOSICIÓN) =====
+Serpiente *-- "1" Segmento
+Segmento *-- Position
+
+Pantalla *-- Textura
+Sonido *-- Audio
+Controlador *-- Entrada
+Puntuacion *-- Numero
+
+' ===== DEPENDENCIAS =====
+Serpiente ..> Direction : "usa"
+Controlador ..> Direction : "produce"
+Juego ..> GameState : "controla"
+Pantalla ..> ScreenType : "pantallas"
+Segmento ..> SegmentType : "identidades"
+Comida ..> FoodType : "categorias"
+Entrada ..> InputAction : "controles"
+@enduml
