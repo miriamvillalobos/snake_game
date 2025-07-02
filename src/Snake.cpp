@@ -1,10 +1,19 @@
-[11:41 p.m., 30/6/2025] eber: #ifndef INPUT_HANDLER_HPP
+#ifndef INPUT_HANDLER_HPP
 #define INPUT_HANDLER_HPP
 
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <functional>
 #include "Snake.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include "Snake.hpp"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
 
 // Forward declaration
 class Game;
@@ -98,7 +107,7 @@ private:
 };
 
 #endif // INPUT_HANDLER_HPP
-[11:43 p.m., 30/6/2025] eber: #include "Snake.hpp"
+#include "Snake.hpp"
 #include "GameRenderer.hpp"
 #include <algorithm>
 

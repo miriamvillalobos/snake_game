@@ -1,6 +1,12 @@
 #ifndef SNAKE_HPP
 #define SNAKE_HPP
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+
 #include <vector>
 #include <string>
 

@@ -5,6 +5,11 @@
 #include "AudioManager.hpp"
 #include "InputHandler.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 Game::Game() 
     : window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Snake Game - C++ SFML Project"),

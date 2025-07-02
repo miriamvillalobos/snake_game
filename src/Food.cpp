@@ -2,6 +2,11 @@
 #include "GameRenderer.hpp"
 #include <random>
 #include <algorithm>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 Food::Food() : position(0, 0), isActive(true), nutritionalValue(10) {
 }

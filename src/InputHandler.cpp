@@ -1,6 +1,11 @@
 #include "InputHandler.hpp"
 #include "Game.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 InputHandler::InputHandler() : gameInstance(nullptr), isEnabled(true) {
 }

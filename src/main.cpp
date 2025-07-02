@@ -1,5 +1,10 @@
 #include "Game.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 int main(int argc, char* argv[]) {
     Game game;

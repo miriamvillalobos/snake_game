@@ -2,6 +2,11 @@
 #include "Snake.hpp"
 #include "Food.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 GameRenderer::GameRenderer() : window(nullptr), gridSize(20) {  // Aumentado de 15 a 20 píxeles
 }

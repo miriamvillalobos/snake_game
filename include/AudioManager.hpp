@@ -4,6 +4,11 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <map>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 /**
  * @brief Clase encargada de la gestión de audio del juego
